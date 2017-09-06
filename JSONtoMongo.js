@@ -6,15 +6,29 @@
 var fs = require('fs'),
     mongoose = require('mongoose'), 
     Schema = mongoose.Schema, 
+    JSON = require('./listings'),
     Listing = require('./ListingSchema.js'), 
     config = require('./config');
 
 /* Connect to your database */
+mongoose.connect(config.db.uri);
 
 /* 
   Instantiate a mongoose model for each listing object in the JSON file, 
   and then save it to your Mongo database 
  */
+ for (var i=0; i<JSON.entries.length; i++) {
+  var newItem = Listing({
+    code: JSON.entries[i].code,
+    name: JSON.entries[i].name,
+    address: JSON.entries[i].address,
+    coordinates: JSON.entries[i].coordinates,
+  });
+
+  newItem.save(function(err){
+    if(err) throw err;
+  });
+ }
 
 
 /* 
