@@ -38,7 +38,7 @@ var updatePhelpsLab = function() {
    */
     Listing.findOne({ name: 'Phelps Laboratory'}, function(err, item){
     if (err) throw err;
-    item.address = "Gainesville, FL 32603";
+    item.address = "11275 Center Drive Gainesville, FL 32611";
 
     item.save(function(err){
       if(err) throw err;
